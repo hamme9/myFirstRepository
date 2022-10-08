@@ -5,4 +5,4 @@ const title = "Первое задание",
       fullPrice = 6000,
       adaptive = 7;
 
-alert("title");
+alert(title);
