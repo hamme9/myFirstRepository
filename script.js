@@ -6,3 +6,5 @@ const title = "Первое задание",
       adaptive = 7;
 
 alert(title);
+
+console.log("Привет");
