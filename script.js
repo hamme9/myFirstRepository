@@ -1,4 +1,4 @@
-const first = 1;
+const first = 2;
 
 const myFunc = function () {
   console.log(first);
