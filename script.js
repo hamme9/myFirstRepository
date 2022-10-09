@@ -1,10 +1,19 @@
 const title = "Первое задание",
-      screens = 3,
+      screens = "Простые, Сложные, Интерактивные",
       screenPrice = 4000,
-      rollback = 5,
-      fullPrice = 6000,
-      adaptive = 7;
+      rollback = 77,
+      fullPrice = 9999999999999,
+      adaptive = true;
 
-alert(title);
+console.log("Тип данных title =", typeof title);
+console.log("Тип данных fullPrice =", typeof fullPrice);
+console.log("Тип данных adaptive =", typeof adaptive);
 
-console.log("Привет");
+console.log("Длина строки screens =", screens.length);
+
+console.log("Стоимость верстки экранов " + screenPrice + " рублей");
+console.log("Стоимость разработки сайта", fullPrice, "рублей");
+
+console.log(screens.toLowerCase().split(","));
+
+console.log(fullPrice * (rollback / 100));
