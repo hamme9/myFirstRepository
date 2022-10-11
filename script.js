@@ -14,30 +14,29 @@ let fullPrice,
     servicePercentPrice,
     allServicePrices;
 
-const getAllServicePrices = function() {
-    return servicePriceOne + servicePriceTwo;
+const getAllServicePrices = function(priceOne, priceTwo) {
+    return priceOne + priceTwo;
 };
 
-function getFullPrice() {
-    return screenPrice + allServicePrices;
+function getFullPrice(price, allPrices) {
+    return price + allPrices;
 }
 
-const getTitle = function() {
+const getTitle = function(title) {
     let titleLower = title.trim().toLowerCase();
-    return titleLower.charAt(0).toUpperCase() + titleLower;
-
+    return titleLower.charAt(0).toUpperCase() + titleLower.slice(1);
 };
 
-const getServicePercentPrices = function() {
-    return fullPrice - (fullPrice * rollback / 100);
+const getServicePercentPrices = function(price, rollback) {
+    return price - (price * rollback / 100);
 };
 
 const getRollbackMessage = function(price, percentPrice) {
     if (price >= 30000) {
         return "Даем скидку 10% \nИтоговая стоимость с учетом скидки в 10% = " + Math.ceil(percentPrice * 0.9);
-    } else if (price >= 15000 && price < 30000) {
+    } else if (price >= 15000) {
         return ("Даем скидку 5% \nИтоговая стоимость с учетом скидки в 5% = " + Math.ceil(percentPrice * 0.95));
-    } else if (price >= 0 && price < 15000) {
+    } else if (price >= 0) {
         return "Скидка не предусмотрена \nИтоговая стоимость = " + Math.ceil(percentPrice);
     } else {
         return "Упс, что-то пошло не так(";
@@ -50,10 +49,10 @@ const showTypeOF = function(variable) {
 
 
 
-allServicePrices = getAllServicePrices();
-fullPrice = getFullPrice();
-servicePercentPrice = getServicePercentPrices();
-title = getTitle();
+allServicePrices = getAllServicePrices(servicePriceOne, servicePriceTwo);
+fullPrice = getFullPrice(screenPrice, allServicePrices);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
+title = getTitle(title);
 
 showTypeOF(title);
 showTypeOF(fullPrice);
@@ -63,27 +62,3 @@ console.log(screens);
 
 console.log("Итоговая стоимость = ", Math.ceil(servicePercentPrice));
 console.log(getRollbackMessage(fullPrice, servicePercentPrice));
-
-// console.log(title);
-// console.log(screens);
-// console.log(screenPrice);
-// console.log(adaptive);
-// console.log(serviceOne);
-// console.log(servicePriceOne);
-// console.log(serviceTwo);
-// console.log(servicePriceTwo);
-
-// console.log(title);
-
-// console.log("Тип данных title =", typeof title);
-// console.log("Тип данных fullPrice =", typeof fullPrice);
-// console.log("Тип данных adaptive =", typeof adaptive);
-
-// console.log("Длина строки screens =", screens.length);
-
-// console.log("Стоимость верстки экранов " + screenPrice + " рублей");
-// console.log("Стоимость разработки сайта", fullPrice, "рублей");
-
-// console.log(screens.toLowerCase().split(", "));
-
-// console.log(fullPrice * (rollback / 100));
