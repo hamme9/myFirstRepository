@@ -21,8 +21,28 @@ const appData = {
       
         appData.adaptive = confirm("Нужен ли адаптив на сайте?");
     },
+    logger: function(){
+        appData.allServicePrices = appData.getAllServicePrices();
+        appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices);
+        appData.servicePercentPrice = appData.getServicePercentPrices(appData.fullPrice, appData.rollback);
+        appData.title = appData.getTitle(appData.title);
+        
+        appData.showTypeOF(appData.title);
+        appData.showTypeOF(appData.fullPrice);
+        appData.showTypeOF(appData.adaptive);
+        
+        console.log(appData.screens);
+        
+        console.log("Итоговая стоимость = ", Math.ceil(appData.servicePercentPrice));
+        console.log(appData.getRollbackMessage(appData.fullPrice, appData.servicePercentPrice));
+        
+        for(let key in appData){
+            console.log('Ключ: ' + key + ' ' + 'Значение: ' + appData[key]);
+        }
+    },
     start: function() {
-        return appData.asking;
+        appData.asking();
+        appData.logger();
     },
     isNumber: function (num) {
         return !isNaN(parseFloat(num)) && isFinite(num); 
@@ -74,17 +94,3 @@ const appData = {
 };
 
 appData.start();
-
-appData.allServicePrices = appData.getAllServicePrices();
-appData.fullPrice = appData.getFullPrice(appData.screenPrice, appData.allServicePrices);
-appData.servicePercentPrice = appData.getServicePercentPrices(appData.fullPrice, appData.rollback);
-appData.title = appData.getTitle(appData.title);
-
-appData.showTypeOF(appData.title);
-appData.showTypeOF(appData.fullPrice);
-appData.showTypeOF(appData.adaptive);
-
-console.log(appData.screens);
-
-console.log("Итоговая стоимость = ", Math.ceil(appData.servicePercentPrice));
-console.log(appData.getRollbackMessage(appData.fullPrice, appData.servicePercentPrice));  
