@@ -1,31 +1,36 @@
 'use strict';
 
 const title = document.getElementsByTagName('h1')[0].innerText;
-const buttonOne = document.getElementsByClassName('handler_btn')[0].innerText;
-const buttonTwo = document.getElementsByClassName('handler_btn')[1].innerText;
+const buttonCalculate = document.getElementsByClassName('handler_btn')[0];
+const buttonReset = document.getElementsByClassName('handler_btn')[1];
 const plus = document.querySelector('.screen-btn').innerText;
-const percent = document.querySelectorAll('.other-items.percent');
-const number = document.querySelectorAll('.other-items.number');
-const input = document.querySelector('.rollback > div > input').getAttribute('type');
-const span = document.querySelector('.rollback span');
+const percentOtherItems = document.querySelectorAll('.other-items.percent');
+const numberOtherItems = document.querySelectorAll('.other-items.number');
+const inputRange = document.querySelector('.rollback input');
+const spanRange = document.querySelector('.rollback span');
 const totalInput = document.getElementsByClassName('total-input');
 
 let screens = document.querySelectorAll('.screen');
 
 console.log(title);
-console.log(buttonOne);
-console.log(buttonTwo);
+console.log(buttonCalculate);
+console.log(buttonReset);
 console.log(plus);
-console.log(percent);
-console.log(number);
-console.log("input type =",input);
-console.log(span);
+console.log(percentOtherItems);
+console.log(numberOtherItems);
+console.log(inputRange);
+console.log(spanRange);
 
-for (let i = 0; i < totalInput.length; i++) {
-    console.log(totalInput[i]);
-}
+let [total, totalCount, totalCountOther,totalFullCount, totalCountRollback] = totalInput;
+console.log(total);
+console.log(totalCount);
+console.log(totalCountOther);
+console.log(totalFullCount);
+console.log(totalCountRollback);
 
 console.log(screens);
+
+
 
 // const appData = {
 //     title: '',
