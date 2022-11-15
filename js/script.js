@@ -49,13 +49,10 @@ const appData = {
         screens.forEach(function(screen, index) {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
-            const selectName = select.options[select.selectedIndex].textContent;
 
-
-            if(selectName == 'Тип экранов' || !appData.isNumber(input.value)) {
+            if(!select.value || !appData.isNumber(input.value)) {
                 result ++;
             }
-            return result;
         });
         if(result == 0) {
             appData.start();
@@ -84,8 +81,6 @@ const appData = {
         totalCount.value = appData.screensCount;
     },
     addScreens: function() {
-        screens = document.querySelectorAll('.screen');
-
         screens.forEach(function(screen, index) {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
