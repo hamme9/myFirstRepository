@@ -52,14 +52,16 @@ const appData = {
             const selectName = select.options[select.selectedIndex].textContent;
 
 
-            if(selectName == 'Тип экранов' && !appData.isNumber(input.value)) {
-                alert('Введите значение экрана');
+            if(selectName == 'Тип экранов' || !appData.isNumber(input.value)) {
                 result ++;
             }
             return result;
         });
         if(result == 0) {
             appData.start();
+        }
+        if(result > 0) {
+            alert('Введите значение экрана');
         }
     },
     start: function() {
@@ -121,9 +123,11 @@ const appData = {
         });
     },
     addScreenBlock: function() {
-        const clonScreen = screens[0].cloneNode(true);
-        screens[screens.length - 1].after(clonScreen);
-        
+        const cloneScreen = screens[0].cloneNode(true),
+        inputValue = cloneScreen.querySelector('.screen input');
+        inputValue.value = '';
+        screens[screens.length - 1].after(cloneScreen);
+        screens = document.querySelectorAll(".screen");
     },
     addPrices: function(){
         for(let screen of appData.screens) {
