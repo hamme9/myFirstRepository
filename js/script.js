@@ -25,6 +25,7 @@ const appData = {
     screenPrice: 0,
     screensCount: 0,
     adaptive: true,
+    status: false,
     fullPrice: 0,
     rollback: 0,
     servicePercentPrice: 0,
@@ -45,6 +46,7 @@ const appData = {
     checking: function() {
         screens = document.querySelectorAll('.screen');
 
+        appData.status = true;
         let result = 0;
         screens.forEach(function(screen, index) {
             const select = screen.querySelector('select');
@@ -72,6 +74,11 @@ const appData = {
     changeRollback: function(e) {
         spanRange.textContent = e.target.value + '%';
         appData.rollback = +e.target.value;
+        if(appData.status) {
+            appData.servicePercentPrice =  appData.fullPrice - (appData.fullPrice * appData.rollback / 100);
+            totalCountRollback.value = appData.servicePercentPrice;
+        }
+
     },
     showResult: function() {
         total.value = appData.screenPrice;
