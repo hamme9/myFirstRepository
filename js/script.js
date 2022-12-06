@@ -10,6 +10,12 @@ const plus = document.querySelector('.screen-btn');
 const percentOtherItems = document.querySelectorAll('.other-items.percent');
 const numberOtherItems = document.querySelectorAll('.other-items.number');
 
+const cmsOpen = document.querySelector('#cms-open');
+const hiddenBlock = document.querySelector('.hidden-cms-variants');
+const cmsSelect = document.querySelector('#cms-select');
+const mainControls = document.querySelector('.hidden-cms-variants .main-controls__input')
+const mainControlsInput = mainControls.querySelector('input')
+
 const inputRange = document.querySelector('.rollback input');
 const spanRange = document.querySelector('.rollback span');
 
@@ -31,6 +37,7 @@ const appData = {
     fullPrice: 0,
     rollback: 0,
     servicePercentPrice: 0,
+    serviceOtherPercentPrice: 0,
     servicePricesPercent: 0,
     servicePricesNumber: 0,
     servicesPercent: {},
@@ -50,6 +57,33 @@ const appData = {
         btnReset.addEventListener('click', () => {
             this.reset();
           });
+
+        cmsOpen.addEventListener('change', () => {
+            this.hiddenItem()
+        })
+        
+    },
+    hiddenItem: function() {
+        if(cmsOpen.checked) {
+            hiddenBlock.style.display = 'flex';
+        } else {
+            hiddenBlock.style.display = 'none';
+        }
+        cmsSelect.addEventListener('change', () => {
+            if(cmsSelect.options[cmsSelect.selectedIndex].value == 'other') {
+                mainControls.style.display = 'block';
+
+                mainControlsInput.addEventListener('change', () => {
+                    if (this.isNumber(mainControlsInput.value)) {
+                        this.serviceOtherPercentPrice = mainControlsInput.value;
+                    }
+                })
+
+            }
+            if(this.isNumber(cmsSelect.options[cmsSelect.selectedIndex].value)) {
+                this.serviceOtherPercentPrice = cmsSelect.options[cmsSelect.selectedIndex].value;
+            }
+        })
     },
     addTitle : function() {
         document.title = title.textContent;
@@ -148,7 +182,7 @@ const appData = {
             this.servicePricesPercent += this.screenPrice * (this.servicesPercent[key] / 100);
         }
 
-        this.fullPrice = +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
+        this.fullPrice = (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) + (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber) * (this.serviceOtherPercentPrice / 100);
 
         this.servicePercentPrice =  this.fullPrice - (this.fullPrice * this.rollback / 100);
 
@@ -172,6 +206,7 @@ const appData = {
         checkbox.forEach((item) => {
             item.disabled = true;
         });
+        plus.disabled = true;   
         inputRange.disabled = true;
         btnCalculate.style.display = 'none';
         btnReset.style.display = 'block';
@@ -210,6 +245,7 @@ const appData = {
         this.servicePricesNumber = 0;
         this.fullPrice = 0;
         this.servicePercentPrice = 0;
+        this.serviceOtherPercentPrice = 0;
         this.servicesPercent = {};
         this.servicesNumber = {};
         this.title = '';
@@ -226,6 +262,10 @@ const appData = {
         inputRange.value = 0;
         spanRange.textContent = inputRange.value + '%';
         totalCount.value = 0;
+        hiddenBlock.style.display = 'none';
+        mainControls.style.display = 'none';
+        cmsSelect.options[cmsSelect.selectedIndex].value = '';
+        cmsSelect.value = '';
     },
     reset: function() {
         this.removeScreen();
