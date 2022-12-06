@@ -228,8 +228,11 @@ const appData = {
             item.checked = false;
         });
         inputRange.disabled = false;
+        plus.disabled = false;  
         btnReset.style.display = 'none';
         btnCalculate.style.display = 'block';
+
+        
     },
     removeScreen: function() {
         screens.forEach((screen, index) => {
@@ -264,7 +267,7 @@ const appData = {
         totalCount.value = 0;
         hiddenBlock.style.display = 'none';
         mainControls.style.display = 'none';
-        cmsSelect.options[cmsSelect.selectedIndex].value = '';
+        mainControlsInput.value = '';
         cmsSelect.value = '';
     },
     reset: function() {
