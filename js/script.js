@@ -79,6 +79,9 @@ const appData = {
                     }
                 })
 
+            } else {
+                mainControls.style.display = 'none';
+                this.serviceOtherPercentPrice = '';
             }
             if(this.isNumber(cmsSelect.options[cmsSelect.selectedIndex].value)) {
                 this.serviceOtherPercentPrice = cmsSelect.options[cmsSelect.selectedIndex].value;
